@@ -7,6 +7,7 @@
 
 #include "test_boost.h"
 #include "test_cpp11.h"
+#include "testAsio.h"
 
 int main() {
 
@@ -46,16 +47,25 @@ int main() {
     std::cout<<timeval1.tv_sec<<","<<timeval1.tv_usec<<std::endl;
 
     std::cout<<"test boost ++++++++++++++++++++++++++++++++"<<std::endl;
+    testTrivialLog();
     testRegex();
     testTokenizer();
-    testTrivialLog();
     testTimer();
+    testFileSystem();
+    //该函数为线程安全的日志
+    BOOST_LOG_TRIVIAL(trace) << "in main model";
 
     std::cout<<"test cpp 11 ------------------------------"<<std::endl;
     testChrono();
     testToString();
     testThread();
     testMutex();
+    testSharedPtr();
 
+
+    std::cout<<"test boost Asio------------------------------"<<std::endl;
+    testAsio();
+    testAsio2();
+    testAsio3();
     return 0;
 }

@@ -4,8 +4,6 @@
 
 #include "test_cpp11.h"
 
-std::mutex myLock;
-
 int testRegex(){
 
     std::cout<<"正则库测试......................"<<std::endl;
@@ -26,7 +24,7 @@ int testRegex(){
     cout << boolalpha << regex_search(s1, rr1, reg1) << endl;
     cout << "s1匹配结果：" << rr1.str() << endl;
     cout << boolalpha << regex_search(s2, rr2, reg1) << endl;
-    cout << "s1匹配结果：" << rr2.str() << endl;
+    cout << "s2匹配结果：" << rr2.str() << endl;
     cout << endl;
 }
 
@@ -42,6 +40,7 @@ void testChrono(){
     std::time_t last = system_clock::to_time_t(now - hours(24));
     std::time_t next = system_clock::to_time_t(now + hours(24));
 
+    //格式化时间并显示的一种方法
     std::cout<<"One day ago, the time was "<<std::put_time(std::localtime(&last),"%F %T")<<std::endl;
     std::cout<<"Next day, the time was "<<std::put_time(std::localtime(&next),"%F %T")<<std::endl;
 
@@ -79,6 +78,8 @@ void testToString(){
     cout<<s2<<":"<<num5<<", "<<s5<<":"<<num6<<endl;
 }
 
+
+std::mutex myLock;
 void threadFunc(int a,string b){
     myLock.lock();
     cout<<"thread function **************************"<<endl;
@@ -112,3 +113,16 @@ void testMutex(){
     thread3.join();
 
 }
+
+void testSharedPtr(){
+
+    cout<<"test shared ptr    **************************"<<endl;
+    std::shared_ptr<Base> strm = std::make_shared<Base>();
+    std::shared_ptr< std::ostream > strm1(new std::ofstream("test.log"));
+
+    strm.get()->name = "aaa";
+    strm.get()->index = 1;
+    cout<< strm.get()->name<<","<< strm.get()->index <<endl;
+}
+
+

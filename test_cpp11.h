@@ -14,12 +14,20 @@
 #include <thread>
 #include <mutex>
 #include <regex>
+#include <fstream>
 
 using namespace std;
+
+class Base{
+public:
+    int index;
+    string name;
+};
 
 void testChrono();
 void testToString();
 void testThread();
 void threadFunc(int a,string b);
 void testMutex();
-#endif //TESTBOOST_TEST_CPP11_H
+void testSharedPtr();
+#endif TESTBOOST_TEST_CPP11_H

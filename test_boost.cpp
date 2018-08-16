@@ -1,8 +1,9 @@
 //
 // Created by lihaifeng on 18-7-7.
 //
-
 #include "test_boost.h"
+#include "test_cpp11.h"
+using namespace std;
 
 int testTokenizer(){
 
@@ -31,10 +32,17 @@ int testTrivialLog(){
 
     std::cout<<"test boost log ..................."<<std::endl;
 
+    boost::log::core::get()->set_filter
+            (
+                    boost::log::trivial::severity >= boost::log::trivial::trace
+            );
+
     boost::log::add_file_log(boost::log::keywords::file_name = "../log/sample_%N.log",
-                             boost::log::keywords::format = "[%TimeStamp%]: [%ProcessID%] [%ThreadID%] %Message%");
+                             boost::log::keywords::format = "[%TimeStamp%]: [%ThreadID%] %Message%",
+                             boost::log::keywords::auto_flush = true);
     boost::log::add_common_attributes();
 
+    //该函数为线程安全的日志
     BOOST_LOG_TRIVIAL(trace) << "A trace severity message";
     BOOST_LOG_TRIVIAL(debug) << "A debug severity message";
     BOOST_LOG_TRIVIAL(info) << "An informational severity message";
@@ -54,4 +62,24 @@ int testTimer(){
         std::sqrt(123.456L); // burn some time
 
     return 0;
+}
+
+int testFileSystem(){
+
+    string fileName = "../config/media_search.cfg";
+    cout<<fileName<<" size: "<<boost::filesystem::file_size(fileName)<<endl;
+    ifstream inFile;
+    inFile.open(fileName);
+    if(inFile.is_open()){
+        string tmp;
+        while(getline(inFile,tmp)){
+            if(tmp.find('#')!=string::npos){
+
+            }else{
+                cout<<tmp<<endl;
+            }
+        }
+    }else{
+        cout<<"open file "<<fileName<<" failed"<<endl;
+    }
 }
