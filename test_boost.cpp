@@ -37,13 +37,21 @@ int testTrivialLog(){
                     boost::log::trivial::severity >= boost::log::trivial::trace
             );
 
+    //boost::log::core::get()->add_global_attribute();
+
     boost::log::add_file_log(boost::log::keywords::file_name = "../log/sample_%N.log",
-                             boost::log::keywords::format = "[%TimeStamp%]: [%ThreadID%] %Message%",
+                             boost::log::keywords::format =  boost::log::expressions::stream
+                                     << boost::log::expressions::format_date_time< boost::posix_time::ptime >("TimeStamp", "%Y-%m-%d %H:%M:%S")
+                                     <<" [" << boost::log::expressions::attr<boost::log::attributes::current_thread_id::value_type>("ThreadID") <<"] <" << boost::log::trivial::severity
+                                     << "> " << boost::log::expressions::smessage,
                              boost::log::keywords::auto_flush = true);
+
     boost::log::add_common_attributes();
+  //  boost::log::expressions::attribute_keyword
+
 
     //该函数为线程安全的日志
-    BOOST_LOG_TRIVIAL(trace) << "A trace severity message";
+    BOOST_LOG_TRIVIAL(trace) <<"A trace severity message";
     BOOST_LOG_TRIVIAL(debug) << "A debug severity message";
     BOOST_LOG_TRIVIAL(info) << "An informational severity message";
     BOOST_LOG_TRIVIAL(warning) << "A warning severity message";

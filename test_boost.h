@@ -22,6 +22,8 @@
 #include <boost/log/attributes.hpp>
 #include <boost/log/sinks.hpp>
 #include <boost/log/sources/logger.hpp>
+#include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <boost/log/support/date_time.hpp>
 
 // init log from file
 #include <boost/log/utility/setup/settings.hpp>
