@@ -85,9 +85,11 @@ void threadFunc(int a,string b){
     cout<<"thread function **************************"<<endl;
     cout<<"传入的参数"<<a<<","<<b<<std::endl;
     cout<<"当前线程id: "<<std::this_thread::get_id()<<endl;
-    cout<<"线程休眠"<<5<<"s"<<endl;
+    cout<<"线程休眠"<<1<<"s"<<endl;
     std::this_thread::sleep_for(chrono::seconds(1));
     myLock.unlock();
+
+    BOOST_LOG_TRIVIAL(info)<<"cpp 11 thread func";
 }
 
 void testThread(){

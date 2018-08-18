@@ -16,6 +16,7 @@
 #include <regex>
 #include <fstream>
 
+#include "test_boost.h"
 using namespace std;
 
 class Base{
