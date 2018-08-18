@@ -9,6 +9,8 @@
 #include <string>
 #include <stdexcept>
 #include <fstream>
+#include <map>
+#include <utility>
 
 
 #include <boost/log/trivial.hpp>
@@ -38,6 +40,9 @@
 #include <boost/program_options/variables_map.hpp>
 
 #include <boost/filesystem.hpp>
+#include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string/classification.hpp>
 
 
 int testRegex();

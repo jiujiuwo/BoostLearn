@@ -46,7 +46,7 @@ int testTrivialLog(){
                                      << "> " << boost::log::expressions::smessage,
                              boost::log::keywords::auto_flush = true);
 
-    boost::log::add_common_attributes();
+    //boost::log::add_common_attributes();
   //  boost::log::expressions::attribute_keyword
 
 
@@ -85,6 +85,20 @@ int testFileSystem(){
 
             }else{
                 cout<<tmp<<endl;
+                map<string,string> configMap;
+                boost::trim(tmp);
+                vector<string> tokens;
+                boost::split(tokens, tmp, boost::is_any_of("="), boost::token_compress_on);
+                for(int i= 0;i < tokens.size();i++){
+                    if(tokens.size()!=2 && tokens.size() > 0){
+                        BOOST_LOG_TRIVIAL(error)<<"配置文件错误"<< tokens[i];
+                    }else{
+                        configMap.insert(pair<string,string>(tokens[i],tokens[i+1]));
+                        BOOST_LOG_TRIVIAL(debug)<< tokens[i]<<" : "<<tokens[i+1];
+                        break;
+                    }
+                }
+                //configMap.insert()
             }
         }
     }else{
