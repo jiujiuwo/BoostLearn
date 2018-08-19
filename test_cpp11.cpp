@@ -44,6 +44,15 @@ void testChrono(){
     std::cout<<"One day ago, the time was "<<std::put_time(std::localtime(&last),"%F %T")<<std::endl;
     std::cout<<"Next day, the time was "<<std::put_time(std::localtime(&next),"%F %T")<<std::endl;
 
+    //ctime
+    time_t time1;
+    time(&time1);
+
+   // tm t = std::localtime(&time1);
+
+    BOOST_LOG_TRIVIAL(fatal)<<std::localtime(&time1)->tm_year + 1990 <<" : "<<std::localtime(&time1)->tm_mon + 1 << " : "<<std::localtime(&time1)->tm_mday<<" ,今天是这一年中第 "<<
+    std::localtime(&time1)->tm_yday<<"天 , 今天星期 "<<std::localtime(&time1)->tm_wday;
+
 }
 /*
 

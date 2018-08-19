@@ -46,9 +46,8 @@ int testTrivialLog(){
                                      << "> " << boost::log::expressions::smessage,
                              boost::log::keywords::auto_flush = true);
 
-    //boost::log::add_common_attributes();
+    boost::log::add_common_attributes();
   //  boost::log::expressions::attribute_keyword
-
 
     //该函数为线程安全的日志
     BOOST_LOG_TRIVIAL(trace) <<"A trace severity message";
