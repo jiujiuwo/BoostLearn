@@ -14,4 +14,5 @@ include_directories(include include/boost)
 add_executable(TestBoost main.cpp test_boost.cpp test_boost.h test_cpp11.cpp test_cpp11.h testAsio.cpp testAsio.h)
 
 target_link_libraries(TestBoost glog pthread boost_thread boost_regex boost_log boost_log_setup
-        boost_system boost_filesystem boost_timer)
+        boost_system boost_filesystem boost_timer boost_stacktrace_backtrace boost_stacktrace_noop boost_stacktrace_addr2line boost_stacktrace_basic
+        dl)

@@ -44,10 +44,16 @@
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
 
+#include <csignal>
+#include <boost/stacktrace.hpp>
+#include <fstream>     // std::ifstream
+#include <boost/filesystem/path.hpp>
+#include <boost/filesystem/operations.hpp>
 
 int testRegex();
 int testTokenizer();
 int testTrivialLog();
 int testTimer();
 int testFileSystem();
+void testStackTrace();
 #endif //TESTBOOST_TEST_BOOST_H

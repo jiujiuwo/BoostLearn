@@ -104,3 +104,31 @@ int testFileSystem(){
         cout<<"open file "<<fileName<<" failed"<<endl;
     }
 }
+
+
+void mySignalHandler(int signalType){
+
+    BOOST_LOG_TRIVIAL(error)<<"错误信号"<< signalType;
+    boost::stacktrace::safe_dump_to("./backtrace.dump");
+    if (boost::filesystem::exists("./backtrace.dump")) {
+        // there is a backtrace
+        std::ifstream ifs("./backtrace.dump");
+
+        boost::stacktrace::stacktrace st = boost::stacktrace::stacktrace::from_dump(ifs);
+        std::cout << "Previous run crashed:\n" << st << std::endl;
+        BOOST_LOG_TRIVIAL(error)<<st;
+
+        // cleaning up
+        ifs.close();
+        boost::filesystem::remove("./backtrace.dump");
+    }
+}
+
+void testStackTrace(){
+    BOOST_LOG_TRIVIAL(debug)<<"test boost stack trace ";
+    std::signal(SIGABRT,&mySignalHandler);
+    std::signal(SIGSEGV,&mySignalHandler);
+    int* a = new int[5];
+    delete [] a;
+    delete [] a;
+}

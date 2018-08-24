@@ -67,5 +67,10 @@ int main() {
     testAsio();
     testAsio2();
     testAsio3();
+
+    BOOST_LOG_TRIVIAL(info)<< "";
+
+    testStackTrace();
+
     return 0;
 }
