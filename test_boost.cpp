@@ -126,6 +126,9 @@ void mySignalHandler(int signalType){
 
 void testStackTrace(){
     BOOST_LOG_TRIVIAL(debug)<<"test boost stack trace ";
+
+    //注册信号量处理函数
+
     std::signal(SIGABRT,&mySignalHandler);
     std::signal(SIGSEGV,&mySignalHandler);
     int* a = new int[5];
